@@ -14,7 +14,7 @@ def sessions_lines(data):
                      'Cost', 'XCost', 'Reqs', 'Txs', 'Subs',
                      'Recv', 'Recv KB', 'Sent', 'Sent KB', 'Time', 'Peer')
     for (id_, flags, peer, client, proto, cost, extra_cost, reqs, txs_sent, subs,
-         recv_count, recv_size, send_count, send_size, time) in data:
+         recv_count, recv_size, send_count, send_size, conn_time) in data:
         yield fmt.format(id_, flags, client, proto,
                          '{:,d}'.format(int(cost)),
                          '{:,d}'.format(int(extra_cost)),
@@ -25,7 +25,7 @@ def sessions_lines(data):
                          '{:,d}'.format(recv_size // 1024),
                          '{:,d}'.format(send_count),
                          '{:,d}'.format(send_size // 1024),
-                         util.formatted_time(time, sep=''), peer)
+                         util.formatted_time(conn_time, sep=''), peer)
 
 
 def groups_lines(data):
@@ -33,15 +33,16 @@ def groups_lines(data):
 
     data is the return value of rpc_groups().'''
 
-    fmt = ('{:<14} {:>9} {:>8} {:>6} {:>6} {:>8}'
+    fmt = ('{:<14} {:>9} {:>8} {:>8} {:>6} {:>6} {:>8}'
            '{:>7} {:>9} {:>7} {:>9}')
-    yield fmt.format('Name', 'Sessions', 'Cost', 'Reqs', 'Txs', 'Subs',
+    yield fmt.format('Name', 'Sessions', 'Cost', 'Retained', 'Reqs', 'Txs', 'Subs',
                      'Recv', 'Recv KB', 'Sent', 'Sent KB')
-    for (name, session_count, cost, reqs, txs_sent, subs,
+    for (name, session_count, cost, retained_cost, reqs, txs_sent, subs,
          recv_count, recv_size, send_count, send_size) in data:
         yield fmt.format(name,
                          '{:,d}'.format(session_count),
                          '{:,d}'.format(int(cost)),
+                         '{:,d}'.format(int(retained_cost)),
                          '{:,d}'.format(reqs),
                          '{:,d}'.format(txs_sent),
                          '{:,d}'.format(subs),
