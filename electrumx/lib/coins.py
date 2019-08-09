@@ -3147,3 +3147,27 @@ class CPUchain(Coin):
         '''Given a header return the hash.'''
         import cpupower
         return cpupower.getPoWHash(header)
+
+class Pigeoncoin(Coin):
+    NAME = "Pigeoncoin"
+    SHORTNAME = "PGN"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0877A12A")
+    XPRV_VERBYTES = bytes.fromhex("0877A12A")
+    P2PKH_VERBYTE = bytes.fromhex("37")
+    P2SH_VERBYTES = [bytes.fromhex("7A")]
+    GENESIS_HASH = ('000000f049bef9fec0179131874c54c7'
+                    '6c0ff59f695db30a4f0da52072c99492')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 1164685
+    TX_COUNT_HEIGHT = 642977
+    TX_PER_BLOCK = 4
+    RPC_PORT = 8757
+    REORG_LIMIT = 55
+    PEERS = [
+    ]
+    @classmethod
+    def header_hash(cls, header):
+        '''Given a header return the hash.'''
+        import x16s_hash
+        return x16s_hash.getPoWHash(header)
