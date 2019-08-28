@@ -3171,3 +3171,28 @@ class Pigeoncoin(Coin):
         '''Given a header return the hash.'''
         import x16s_hash
         return x16s_hash.getPoWHash(header)
+
+class Raptoreum(Coin):
+    NAME = "Raptoreum"
+    SHORTNAME = "RTM"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488B21E")
+    XPRV_VERBYTES = bytes.fromhex("0488ADE4")
+    P2PKH_VERBYTE = bytes.fromhex("3C")
+    P2SH_VERBYTES = [bytes.fromhex("7A")]
+    GENESIS_HASH = ('daaceaf9950507936dbd74747211f2e7'
+                    '7bea702049f264fe71a1caa1c842a99b')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 56939
+    TX_COUNT_HEIGHT = 56520
+    TX_PER_BLOCK = 4
+    RPC_PORT = 9767
+    REORG_LIMIT = 55
+    PEERS = [
+        
+    ]
+    @classmethod
+    def header_hash(cls, header):
+        '''Given a header return the hash.'''
+        import gr_hash
+        return gr_hash.getPoWHash(header)
