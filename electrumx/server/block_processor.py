@@ -56,6 +56,7 @@ class Prefetcher(object):
             except DaemonError as e:
                 self.logger.info(f'ignoring daemon error: {e}')
             except asyncio.CancelledError as e:
+                print(e)
                 self.logger.info(f'cancelled; prefetcher stopping with error {e}')
                 raise
             except Exception:
