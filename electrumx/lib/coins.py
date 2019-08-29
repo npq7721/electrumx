@@ -3191,8 +3191,8 @@ class Raptoreum(Coin):
     PEERS = [
         
     ]
-    @classmethod
-    def header_hash(cls, header):
-        '''Given a header return the hash.'''
-        import gr_hash
-        return gr_hash.getPoWHash(header)
+#     @classmethod
+#     def header_hash(cls, header):
+#         '''Given a header return the hash.'''
+#         import gr_hash
+#         return gr_hash.getPoWHash(header)
