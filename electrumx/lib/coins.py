@@ -3163,7 +3163,7 @@ class Pigeoncoin(Coin):
     TX_COUNT_HEIGHT = 642977
     TX_PER_BLOCK = 4
     RPC_PORT = 8757
-    REORG_LIMIT = 55
+    REORG_LIMIT = 1000
     PEERS = [
     ]
     @classmethod
