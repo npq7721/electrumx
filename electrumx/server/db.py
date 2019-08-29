@@ -246,7 +246,7 @@ class DB(object):
                           if self.fs_height >= 0 else 0)
         
         print (len(flush_data.block_tx_hashes))
-        print "="
+        print ("=")
         print (len(flush_data.headers))
         assert len(flush_data.block_tx_hashes) == len(flush_data.headers)
         assert flush_data.height == self.fs_height + len(flush_data.headers)
