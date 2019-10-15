@@ -3159,6 +3159,8 @@ class Pigeoncoin(Coin):
     GENESIS_HASH = ('000000f049bef9fec0179131874c54c7'
                     '6c0ff59f695db30a4f0da52072c99492')
     DESERIALIZER = lib_tx.DeserializerSegWit
+    X21S_ACTIVATION_TIME = 1571097600  # algo switch to x21s at this timestamp
+
     TX_COUNT = 1164685
     TX_COUNT_HEIGHT = 642977
     TX_PER_BLOCK = 4
@@ -3169,8 +3171,13 @@ class Pigeoncoin(Coin):
     @classmethod
     def header_hash(cls, header):
         '''Given a header return the hash.'''
-        import x16s_hash
-        return x16s_hash.getPoWHash(header)
+        timestamp = util.unpack_le_uint32_from(header, 68)[0]
+        if timestamp >= cls.X21S_ACTIVATION_TIME:
+            import x21s_hash
+            return x21s_hash.getPoWHash(header)
+        else:
+            import x16s_hash
+            return x16s_hash.getPoWHash(header)
 
 class Raptoreum(Coin):
     NAME = "Raptoreum"
