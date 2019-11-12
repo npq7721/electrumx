@@ -364,17 +364,13 @@ class MemPool(object):
             result.update(tx.prevouts)
         return result
 
-    async def transaction_summaries(self, hashX, limit=10):
+    async def transaction_summaries(self, hashX):
         '''Return a list of MemPoolTxSummary objects for the hashX.'''
         result = []
-        trans_limit = 0
         for tx_hash in self.hashXs.get(hashX, ()):
             tx = self.txs[tx_hash]
             has_ui = any(hash in self.txs for hash, idx in tx.prevouts)
             result.append(MemPoolTxSummary(tx_hash, tx.fee, has_ui))
-            trans_limit += 1
-            if trans_limit >= limit:
-                return result
         return result
 
     async def unordered_UTXOs(self, hashX):
