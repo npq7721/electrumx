@@ -112,7 +112,7 @@ class SessionManager:
     '''Holds global state about all sessions.'''
 
     def __init__(self, env, db, bp, daemon, mempool, shutdown_event):
-        env.max_send = max(350000, env.max_send)
+        env.max_send = max(10000, env.max_send)
         self.env = env
         self.db = db
         self.bp = bp
