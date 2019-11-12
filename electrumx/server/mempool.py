@@ -373,7 +373,7 @@ class MemPool(object):
             has_ui = any(hash in self.txs for hash, idx in tx.prevouts)
             result.append(MemPoolTxSummary(tx_hash, tx.fee, has_ui))
             trans_limit += 1
-            if(trans_limit >= limit)
+            if trans_limit >= limit:
                 return result
         return result
 
