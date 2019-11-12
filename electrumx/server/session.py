@@ -731,7 +731,8 @@ class SessionManager:
             result = await self.db.limited_history(hashX, limit=limit)
             cost += 0.1 + len(result) * 0.001
             if len(result) >= limit:
-                result = RPCError(BAD_REQUEST, f'history too large', cost=cost)
+                result = result[:limit];
+                #result = RPCError(BAD_REQUEST, f'history too large', cost=cost)
             self._history_cache[hashX] = result
 
         if isinstance(result, Exception):
