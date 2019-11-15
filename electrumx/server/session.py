@@ -113,6 +113,7 @@ class SessionManager:
 
     def __init__(self, env, db, bp, daemon, mempool, shutdown_event):
         env.max_send = max(350000, env.max_send)
+        env.history_limit = max(100, env.history_limit)
         self.env = env
         self.db = db
         self.bp = bp
@@ -721,7 +722,9 @@ class SessionManager:
         History is a sorted list of (tx_hash, height) tuples, or an RPCError.'''
         # History DoS limit.  Each element of history is about 99 bytes when encoded
         # as JSON.
-        limit = self.env.max_send // 299
+        limit = self.env.max_send // 99
+        if limit >= self.env.history_limit:
+            limit = self.env.history_limit
         cost = 0.1
         self._history_lookups += 1
         try:
