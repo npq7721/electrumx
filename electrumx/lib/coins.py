@@ -69,6 +69,7 @@ class Coin(object):
     STATIC_BLOCK_HEADERS = True
     SESSIONCLS = ElectrumX
     DEFAULT_MAX_SEND = 1000000
+    DEFAULT_HISTORY_LIMIT = 1000
     DESERIALIZER = lib_tx.Deserializer
     DAEMON = daemon.Daemon
     BLOCK_PROCESSOR = block_proc.BlockProcessor
